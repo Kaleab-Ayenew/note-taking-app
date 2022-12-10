@@ -78,7 +78,7 @@
 .note-row{
     width: 100%;
     height: 15vh;
-    min-height: 150px;
+    min-height: 100px;
     background-color: white;
     color: black;
     display: flex;
