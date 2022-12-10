@@ -35,7 +35,7 @@
 
 .search-bar > input:focus{
     background-color: black;
-    border: 1px solid white;
+    outline: none;
 }
 .search-bar > i{
     height: 100%;
