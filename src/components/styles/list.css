@@ -61,4 +61,12 @@
     height: 15vh;
     background-color: black;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-row-content{
+    width: 80%;
+    height: 90%;
 }
