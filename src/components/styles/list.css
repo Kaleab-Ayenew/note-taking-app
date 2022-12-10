@@ -69,9 +69,7 @@
 .note-row-content{
     width: 80%;
     height: 80%;
-    text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
 }
 
 .note-row-content > h2{
@@ -82,5 +80,5 @@
 .note-row-content > p{
     padding: 0;
     margin: 0;
-    height: 20%;
+    
 }
