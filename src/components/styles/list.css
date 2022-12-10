@@ -122,4 +122,6 @@
     position: fixed;
     right: 10%;
     bottom: 5vh;
+    background-color: white;
+    border-radius: 60%;
 }
