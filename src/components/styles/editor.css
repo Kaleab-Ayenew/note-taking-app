@@ -79,6 +79,7 @@
     border: none;
     font-family: 'Roboto Condensed', sans-serif;
     height: 70%;
+    resize: none;
     font-size: 1.25em;
     border-top: none;
     border-left: none;
