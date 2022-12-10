@@ -79,4 +79,5 @@
 .note-row-content > p{
     padding: 0;
     margin: 0;
+    text-overflow: ellipsis;
 }
