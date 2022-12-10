@@ -3,6 +3,7 @@
     width: 100%;
     max-width: 100%;
     background-color: white;
+    font-family: 'Roboto Condensed', sans-serif;
     
 }
 
@@ -33,6 +34,7 @@
     padding-left: 10px;
     overflow: hidden;
     text-overflow: clip;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .search-bar > input:focus{
