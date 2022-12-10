@@ -125,3 +125,7 @@
     background-color: white;
     border-radius: 60%;
 }
+
+.add-button > img{
+    width: 55px;
+}
