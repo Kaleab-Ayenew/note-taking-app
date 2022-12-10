@@ -54,4 +54,6 @@
     width: 90%;
     background-color: red;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
