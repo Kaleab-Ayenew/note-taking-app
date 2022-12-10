@@ -80,6 +80,10 @@
     font-family: 'Roboto Condensed', sans-serif;
     height: 70%;
     font-size: 1.25em;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid gray;
 }
 
 .editor-box > input:focus, textarea:focus{
