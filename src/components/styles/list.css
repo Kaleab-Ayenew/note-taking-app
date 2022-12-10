@@ -55,7 +55,11 @@
 /* Header CSS Ends Here */
 
 /* Note Row CSS Begins Here */
-
+.note-list-column{
+    display: flex;
+    flex-direction: column;
+    
+}
 .note-row{
     width: 100%;
     height: 15vh;

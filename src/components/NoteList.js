@@ -8,14 +8,17 @@ export default function NoteList(){
 
     return(
         <div className="note-list-main">
+
             <Header/>
 
             <div className="note-list-column">
                 <NoteRow />
+                <NoteRow />
+                <NoteRow />
             </div>
 
             <div className="add-button">
-                
+
             </div>
             
         </div>
