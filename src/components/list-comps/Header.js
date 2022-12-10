@@ -9,6 +9,7 @@ export default function Header(){
             header.classList.add("sticky-header")
         }else{
             header.classList.remove("sticky-header")
+            header.style.transform = ``
         }
     }
     return (
