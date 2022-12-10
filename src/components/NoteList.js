@@ -5,7 +5,7 @@ import NoteRow from "./list-comps/NoteRow"
 
 export default function NoteList(){
 
-
+    
     return(
         <div className="note-list-main">
 
