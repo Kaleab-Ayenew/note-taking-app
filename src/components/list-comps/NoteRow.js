@@ -9,6 +9,8 @@ export default function NoteRow(){
                 </h2>
                 <p className="note-text">
                     This is some randome note content that nobody cares about,
+                    I also don't care This is some randome note content that nobody cares about,
+                    I also don't careThis is some randome note content that nobody cares about,
                     I also don't care
                 </p>
             </div>
