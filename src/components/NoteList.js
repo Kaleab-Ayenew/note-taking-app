@@ -15,6 +15,12 @@ export default function NoteList(){
                 <NoteRow />
                 <NoteRow />
                 <NoteRow />
+                <NoteRow />
+                <NoteRow />
+                <NoteRow />
+                <NoteRow />
+                <NoteRow />
+                <NoteRow />
             </div>
 
             <div className="add-button">
