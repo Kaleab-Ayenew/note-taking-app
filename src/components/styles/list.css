@@ -89,10 +89,15 @@
 }
 
 .note-row:active{
+    width: 100%;
     background-color: black;
     color: white;
     height: 15vh;
     min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid black;
 }
 
 .note-row-content{
