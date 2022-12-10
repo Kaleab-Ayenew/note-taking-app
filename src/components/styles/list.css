@@ -12,6 +12,5 @@
     background-color: red;
     display: flex;
     align-items: center;
-    align-content: center;
     flex-direction: column;
 }
