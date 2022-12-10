@@ -71,6 +71,11 @@
     color: black;
 }
 
-.editor-box > input, textarea{
+.editor-box > textarea{
+    border: none;
+}
 
+.editor-box > input:focus, textarea:focus{
+    outline: none;
+    border: none;
 }
