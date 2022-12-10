@@ -60,7 +60,9 @@
 
 .editor-box > input{
     height: 40px;
-    border: none;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid gray;
     font-size: 1.5em;
     overflow: hidden;
     text-overflow: clip;
