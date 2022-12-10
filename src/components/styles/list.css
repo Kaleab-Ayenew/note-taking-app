@@ -122,8 +122,6 @@
     position: fixed;
     right: 10%;
     bottom: 5vh;
-    background-color: red;
-    border-radius: 60px;
 }
 
 .add-button > img{
