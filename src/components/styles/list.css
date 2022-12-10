@@ -70,3 +70,7 @@
     width: 80%;
     height: 90%;
 }
+
+.note-row-content > h2{
+    padding: 0;
+}
