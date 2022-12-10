@@ -91,6 +91,8 @@
 .note-row:active{
     background-color: black;
     color: white;
+    height: 15vh;
+    min-height: 100px;
 }
 
 .note-row-content{
