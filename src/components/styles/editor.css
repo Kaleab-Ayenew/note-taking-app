@@ -19,16 +19,17 @@
 }
 
 .editor-header-cont{
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .editor-button{
-    width: 70px;
-    height: 30px;
+    width: 75px;
+    height: 35px;
     background-color: black;
     color: white;
-    border: 2px solid white
+    border: none;
+    border-radius: 10px;
 }
