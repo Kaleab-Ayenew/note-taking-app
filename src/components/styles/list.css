@@ -38,6 +38,7 @@
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     background-color: black;
+    color: white;
 }
 
 .search-bar > input:focus{
