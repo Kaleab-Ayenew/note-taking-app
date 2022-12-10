@@ -20,8 +20,10 @@
     height: 100%;
     display: flex;
     align-items: center;
+    border-bottom: 2px solid black;
 }
 
 .search-bar > input{
     height: 60%;
+    border: none;
 }
