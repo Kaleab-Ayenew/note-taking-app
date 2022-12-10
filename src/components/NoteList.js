@@ -9,7 +9,11 @@ export default function NoteList(){
 
     return(
         <div className="note-list-main">
-
+            <Header/>
+            <div className="note-list-column">
+                <NoteRow />
+            </div>
+            
         </div>
     )
 }
