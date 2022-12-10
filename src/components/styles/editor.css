@@ -49,4 +49,6 @@
 
 .editor-box{
     width: 80%;
+    background-color: red;
+    height: 100%;
 }
