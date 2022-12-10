@@ -33,6 +33,9 @@
     padding-left: 10px;
 }
 
+.search-bar > input:active{
+    border: 30px;
+}
 .search-bar > i{
     height: 100%;
     display: flex;
