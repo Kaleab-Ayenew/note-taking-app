@@ -4,7 +4,7 @@ export default function Header(){
     window.onscroll = ()=>{
         let header = document.getElementsByClassName("header-main")[0];
 
-        if ((window.pageYOffset - header.offsetHeight) > header.offsetTop){
+        if ((window.pageYOffset) > header.offsetTop){
             header.classList.add("sticky-header")
         }else{
             header.classList.remove("sticky-header")
