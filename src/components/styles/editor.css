@@ -61,8 +61,7 @@
 .editor-box > input{
     height: 40px;
     border: none;
-    font-size: 1em;
-    padding-left: 10px;
+    font-size: 1.5em;
     overflow: hidden;
     text-overflow: clip;
     font-family: 'Roboto Condensed', sans-serif;
@@ -74,6 +73,8 @@
 .editor-box > textarea{
     border: none;
     font-family: 'Roboto Condensed', sans-serif;
+    height: 70%;
+    font-size: 1.25em;
 }
 
 .editor-box > input:focus, textarea:focus{
