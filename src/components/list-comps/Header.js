@@ -8,7 +8,7 @@ export default function Header(){
                     <img src={searchIcon} alt="search-icon"/>
                 </i>
 
-                <input className="search-bar-input" type="text" />
+                <input placeholder="Search Notes" className="search-bar-input" type="text" />
             </div>
         </div>
     )
