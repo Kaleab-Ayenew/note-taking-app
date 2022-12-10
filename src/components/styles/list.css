@@ -126,7 +126,7 @@
 
 .add-button > img{
     width: 55px;
-    box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px gray;
     border-radius: 50%;
     background-color: white;
 }
