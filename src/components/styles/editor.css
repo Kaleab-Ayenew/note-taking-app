@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     min-height: 80px;
+    border-bottom: 2px solid black;
 }
 
 .editor-header-cont{
@@ -32,4 +33,9 @@
     color: white;
     border: none;
     border-radius: 10px;
+}
+
+.editor-header-cont > span{
+    font-weight: 700;
+    font-size: 2em;
 }
