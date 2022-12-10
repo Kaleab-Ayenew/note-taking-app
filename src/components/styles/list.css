@@ -88,6 +88,11 @@
     border-bottom: 2px solid black;
 }
 
+.note-row:active{
+    background-color: black;
+    color: white;
+}
+
 .note-row-content{
     width: 80%;
     height: 80%;

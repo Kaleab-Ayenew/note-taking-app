@@ -5,7 +5,6 @@ export default function Header(){
         let header = document.getElementsByClassName("header-main")[0];
 
         if ((window.pageYOffset - header.offsetHeight) > header.offsetTop){
-            header.style.transform = `translateY(${header.offsetHeight}px)`
             header.classList.add("sticky-header")
         }else{
             header.classList.remove("sticky-header")
