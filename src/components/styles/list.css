@@ -81,5 +81,5 @@
     padding: 0;
     margin: 0;
     height: 20%;
-    text-overflow: ellipsis;
+    overflow-y: hidden;
 }
