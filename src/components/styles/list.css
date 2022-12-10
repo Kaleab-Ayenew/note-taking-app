@@ -31,10 +31,10 @@
     border: none;
     font-size: 3.2vh;
     padding-left: 10px;
+    overflow: hidden;
 }
 
 .search-bar > input:focus{
-    background-color: black;
     outline: none;
 }
 .search-bar > i{
