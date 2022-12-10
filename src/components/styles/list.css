@@ -3,6 +3,8 @@
     width: 100%;
     max-width: 100%;
     background-color: white;
+    display: flex;
+    align-content: center;
     
 }
 
@@ -11,5 +13,5 @@
     height: 10vh;
     background-color: red;
     display: flex;
-    align-content: center;
+    align-items: center;
 }
