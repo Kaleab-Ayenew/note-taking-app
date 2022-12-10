@@ -130,3 +130,7 @@
     border-radius: 50%;
     background-color: white;
 }
+
+.add-button > img:active{
+    width: 51px;
+}
