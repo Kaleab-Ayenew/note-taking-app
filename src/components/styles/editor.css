@@ -84,6 +84,7 @@
     border-left: none;
     border-right: none;
     border-bottom: 1px solid gray;
+    line-height: 1.3em;
 }
 
 .editor-box > input:focus, textarea:focus{
