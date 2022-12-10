@@ -75,10 +75,11 @@
 .note-row-content > h2{
     padding: 0;
     margin: 0;
+    font-weight: 700;
 }
 
 .note-row-content > p{
-    margin-top: 10px;
+    margin-top: 2%;
     padding: 0;
     
 }
