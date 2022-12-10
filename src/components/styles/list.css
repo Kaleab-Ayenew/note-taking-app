@@ -29,6 +29,7 @@
 
 .search-bar > input{
     height: 60%;
+    width: 90%;
     border: none;
     font-size: 3.2vh;
     padding-left: 10px;
