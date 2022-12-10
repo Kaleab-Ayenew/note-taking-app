@@ -73,9 +73,9 @@
 
 .editor-box > textarea{
     border: none;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .editor-box > input:focus, textarea:focus{
     outline: none;
-    border: none;
 }
