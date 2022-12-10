@@ -3,7 +3,7 @@ import React from "react";
 export default function EditBox(){
     return (
         <div className="editor-box">
-            <input type="text"/>
+            <input placeholder="Your Title" type="text"/>
             <textarea />
         </div>
     )
