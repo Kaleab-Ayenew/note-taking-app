@@ -26,7 +26,10 @@
     border-bottom: 2px solid white;
     overflow: hidden;
 }
-
+::placeholder{
+    color: rgb(199, 199, 199);
+    opacity: 1;
+}
 .search-bar > input{
     height: 60%;
     width: 90%;
