@@ -8,7 +8,8 @@ export default function NoteRow(){
                     This is a title
                 </h2>
                 <p className="note-text">
-                    This is some randome note content that nobody cares about, This is some randome note content that nobody cares about
+                    This is some randome note content that nobody cares about, 
+                    This is some randome note content that nobody cares about
                     
                 </p>
             </div>
