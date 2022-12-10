@@ -8,7 +8,7 @@ export default function EditHeader(){
             </button>
             <span>Note Editor</span>
             <button id="back" className="editor-button">
-
+                Back
             </button>
         </div>
     )
