@@ -52,7 +52,7 @@
 
 .editor-box{
     width: 90%;
-    background-color: red;
+    background-color: white;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -68,9 +68,11 @@
     font-weight: 700;
     background-color: white;
     color: black;
+    margin-top: 20px;
 }
 
 .editor-box > textarea{
+    margin-top: 15px;
     border: none;
     font-family: 'Roboto Condensed', sans-serif;
     height: 70%;
