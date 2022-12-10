@@ -29,3 +29,7 @@
     font-size: 3.2vh;
     padding-left: 10px;
 }
+
+.search-bar > img{
+    width: 40px;
+}
