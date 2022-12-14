@@ -1,15 +1,18 @@
 import React from "react";
 
-export default function NoteRow(){
+export default function NoteRow(data){
+    let props = data.props
+    let title = props.title
+    let content = props.content
+    let key = props.id
     return (
         <div className="note-row">
             <div className="note-row-content">
                 <h2 className="note-title">
-                    This is a title
+                    {title}
                 </h2>
                 <p className="note-text">
-                    This is some randome note content that nobody cares about, 
-                    This is some randome 
+                    {content}
                     
                 </p>
             </div>
