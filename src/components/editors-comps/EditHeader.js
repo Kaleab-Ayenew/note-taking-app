@@ -1,3 +1,4 @@
+import axios from "axios"
 import React from "react"
 
 export default function EditHeader(props){
@@ -10,6 +11,31 @@ export default function EditHeader(props){
         console.log(saveState)
     }
 
+    function deleteHandler(event){
+        let editorCompObj = {
+            name: "list",
+            props:{}
+        }
+
+        let axiosData = {
+            url: props.endPoint,
+            method: "DELETE",
+            headers:{
+                authorization: "Token 238154cfb07b88f3bf43f481370206b0188edeea"
+            }
+        }
+
+        axios(axiosData)
+        .then((resp)=>{
+            console.log(resp.data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+        props.setActiveComp(editorCompObj)
+    }
+
     return(
         <div className="editor-header">
             <div className="editor-header-cont">
@@ -17,8 +43,8 @@ export default function EditHeader(props){
                     Save
                 </button>
                 <span>Note Editor</span>
-                <button id="back" className="editor-button">
-                    Back
+                <button onClick={deleteHandler} id="delete" className="editor-button">
+                    Delete
                 </button>
             </div>
         </div>

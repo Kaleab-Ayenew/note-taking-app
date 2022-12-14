@@ -39,6 +39,16 @@ export default function EditBox(props){
         
     },[saveState])
 
+    function backToList(event){
+        let editorCompObj = {
+            name: "list",
+            props:{}
+        }
+        props.setActiveComp(editorCompObj)
+    }
+
+    
+
     function editHandler(event){
         console.log(editorContent)
         setEditorContent((oldVal)=>{
@@ -54,6 +64,7 @@ export default function EditBox(props){
         <div className="editor-box">
             <input name="title" onChange={editHandler} value={editorContent.title} placeholder="Your Title" type="text"/>
             <textarea name="content" onChange={editHandler} value={editorContent.content} placeholder="Write a new note..." />
+            <button onClick={backToList} className="back-button" name="back-home">Go Back</button>
         </div>
     )
 }

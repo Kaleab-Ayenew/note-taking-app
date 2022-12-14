@@ -15,6 +15,8 @@ export default function Editor(data){
         endPoint =`http://127.0.0.1:8000/api/note-content/${props.id}/`
         isNew = false
     }
+
+    
     return(
         <div className="editor-main">
             <EditHeader 
@@ -24,6 +26,9 @@ export default function Editor(data){
                 setEditorContent={setEditorContent}
                 saveState={saveState}
                 setSaveState={setSaveState}
+                setActiveComp={data.setActiveComp}
+                activeComp={data.activeComp}
+                
             />
 
             <EditBox  
@@ -33,6 +38,8 @@ export default function Editor(data){
                 setEditorContent={setEditorContent}
                 saveState={saveState}
                 setSaveState={setSaveState}
+                setActiveComp={data.setActiveComp}
+                activeComp={data.activeComp}
             />
         </div>
     )
