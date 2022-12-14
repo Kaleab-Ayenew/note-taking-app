@@ -11,16 +11,15 @@ export default function NoteList(props){
     let stateArray = [noteList, setNoteList, activeComp, setActiveComp]
 
     function openEditor(event){
-        let isNew = (event.target.name === "addBut")
+        let isNew = (event.currentTarget.name === "addBut")
+        console.log(event.currentTarget.name)
         let editorCompObj = {
             name: "editor",
             props:{
-                id: (isNew ? "add" : event.target.id),
-
-
+                id: (isNew ? "add" : event.currentTarget.id)
             }
         }
-        setActiveComp()
+        setActiveComp(editorCompObj)
     }
 
 
@@ -41,7 +40,7 @@ export default function NoteList(props){
     },[])
 
     let noteCompList = noteList.map((item,index)=>{
-        return(<NoteRow stateArray={stateArray} noteList={noteList} key={index} props={item} />)
+        return(<NoteRow clickHandler={openEditor} stateArray={stateArray} noteList={noteList} key={index} props={item} />)
     })
 
     function changeActiveComp(event){
@@ -58,7 +57,7 @@ export default function NoteList(props){
             </div>
 
             <div className="add-button">
-                <img name="addBut" alt="Add Buttion" src={addButton}/>
+                <img onClick={openEditor} name="addBut" alt="Add Buttion" src={addButton}/>
             </div>
             
         </div>

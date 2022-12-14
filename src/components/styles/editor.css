@@ -45,6 +45,10 @@
     border-radius: 10px;
 }
 
+.saved-button{
+    background-color: gray;
+}
+
 .editor-header-cont > span{
     font-weight: 700;
     font-size: 1.25em;
