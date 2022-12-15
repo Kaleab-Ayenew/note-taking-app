@@ -1,0 +1,65 @@
+.signup-main{
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-box{
+    width: 80%;
+    max-width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-box span.error-box{
+    background-color: red;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.signup-box > h2{
+    margin: 0;
+}
+
+.signup-box label{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.signup-box input{
+    width: 100%;
+    max-width: 290px;
+    height: 40px;
+    padding: 0 10px;
+    text-overflow: clip;
+}
+
+.signup-box input:focus{
+    outline: none;
+    border: 2px solid black;
+    background-color: rgb(213, 235, 253);
+}
+
+.signup-box button{
+    width: 100%;
+    max-width: 290px;
+    margin-top: 20px;
+    height: 40px;
+}
+
+.create-account{
+    color: rgb(38, 111, 221);
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+.create-account:active{
+    color: red;
+}

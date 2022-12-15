@@ -1,0 +1,38 @@
+.sign-up-done-main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.message-box{
+    width: 80%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+
+.message-box > span{
+   color: white;
+   font-size: 20px;
+   margin-bottom: 20px;
+   text-align: center;
+   background-color: lightgreen;
+   line-height: 2em;
+}
+
+.message-box > button{
+    height: 40px;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+.message-box > button:active{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}

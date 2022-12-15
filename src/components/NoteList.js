@@ -22,6 +22,14 @@ export default function NoteList(props){
         setActiveComp(editorCompObj)
     }
 
+    React.useEffect(()=>{
+        if (localStorage.getItem('user-data') === null){
+            props.setActiveComp({name:"login", props:{}})
+        }else{
+            props.setUserInfo(JSON.parse(localStorage.getItem('user-data')))
+        }
+    },[])
+
 
 
     React.useEffect(()=>{
@@ -30,7 +38,7 @@ export default function NoteList(props){
             url:"http://127.0.0.1:8000/api/my-notes/",
             method:"GET",
             headers:{
-                authorization:"Token 238154cfb07b88f3bf43f481370206b0188edeea"
+                authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
             }
         }).then((resp)=>{
             setNoteList(resp.data)

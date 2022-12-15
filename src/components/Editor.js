@@ -28,6 +28,7 @@ export default function Editor(data){
                 setSaveState={setSaveState}
                 setActiveComp={data.setActiveComp}
                 activeComp={data.activeComp}
+                {...data}
                 
             />
 
@@ -38,8 +39,7 @@ export default function Editor(data){
                 setEditorContent={setEditorContent}
                 saveState={saveState}
                 setSaveState={setSaveState}
-                setActiveComp={data.setActiveComp}
-                activeComp={data.activeComp}
+                {...data}
             />
         </div>
     )

@@ -11,7 +11,7 @@ export default function EditBox(props){
                 url: props.endPoint,
                 method: "GET",
                 headers:{
-                    authorization:"Token 238154cfb07b88f3bf43f481370206b0188edeea"
+                    authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
                 }
             }).then((resp)=>{
                 setEditorContent(resp.data)
@@ -27,7 +27,7 @@ export default function EditBox(props){
             url:props.endPoint,
             method: props.isNew ? "POST" : "PUT" ,
             headers:{
-                        authorization:"Token 238154cfb07b88f3bf43f481370206b0188edeea"
+                        authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
             },
             data: editorContent
         }
@@ -38,15 +38,6 @@ export default function EditBox(props){
         })
         
     },[saveState])
-
-    function backToList(event){
-        let editorCompObj = {
-            name: "list",
-            props:{}
-        }
-        props.setActiveComp(editorCompObj)
-    }
-
     
 
     function editHandler(event){
@@ -60,11 +51,20 @@ export default function EditBox(props){
         setSaveState("")    
     }
 
+    function saveHandler(event){
+        setSaveState("saved")
+        console.log("The Content Was Saved")
+        console.log(saveState)
+    }
+
     return (
         <div className="editor-box">
             <input name="title" onChange={editHandler} value={editorContent.title} placeholder="Your Title" type="text"/>
             <textarea name="content" onChange={editHandler} value={editorContent.content} placeholder="Write a new note..." />
-            <button onClick={backToList} className="back-button" name="back-home">Go Back</button>
+            
+            <button  onClick={saveHandler} id="save" className={`save-button ${saveState ? "saved-button" : ""}`}>
+                    Save
+                </button>
         </div>
     )
 }
