@@ -3,7 +3,10 @@ import "./styles/list.css";
 import Header from "./list-comps/Header"
 import NoteRow from "./list-comps/NoteRow"
 import addButton from "../images/add-button.png"
+import SideBar from "./list-comps/SideBar";
 import axios from "axios";
+
+
 export default function NoteList(props){
     let [noteList, setNoteList] = React.useState([])
     let activeComp = props.activeComp
@@ -57,8 +60,8 @@ export default function NoteList(props){
     
     return(
         <div className="note-list-main">
-
-            <Header/>
+            <SideBar {...props}/>
+            <Header {...props}/>
 
             <div className="note-list-column">
                 {noteCompList}
