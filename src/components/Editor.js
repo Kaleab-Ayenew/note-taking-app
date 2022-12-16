@@ -9,10 +9,10 @@ export default function Editor(data){
     let props = data.data
     let endPoint, isNew;
     if (props.id === "add"){
-        endPoint = "http://127.0.0.1:8000/api/my-notes/"
+        endPoint = `${data.url}/api/my-notes/`
         isNew = true
     }else{
-        endPoint =`http://127.0.0.1:8000/api/note-content/${props.id}/`
+        endPoint =`${data.url}/api/note-content/${props.id}/`
         isNew = false
     }
 

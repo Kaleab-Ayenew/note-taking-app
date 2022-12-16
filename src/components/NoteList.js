@@ -38,7 +38,7 @@ export default function NoteList(props){
     React.useEffect(()=>{
         console.log(noteList)
         axios({
-            url:"http://127.0.0.1:8000/api/my-notes/",
+            url:`${props.url}/api/my-notes/`,
             method:"GET",
             headers:{
                 authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`

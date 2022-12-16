@@ -20,7 +20,7 @@ export default function Signup(props){
 
     function submitForm(event){
         let axiosData = {
-            url:"http://127.0.0.1:8000/accounts/sign-up/",
+            url:`${props.url}/accounts/sign-up/`,
             method:"POST",
             data: formData,
         }

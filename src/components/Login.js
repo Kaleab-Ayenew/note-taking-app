@@ -5,7 +5,7 @@ import "./styles/Login.css"
 export default function Login(props){
 
     let [formData, setFormData] = React.useState({})
-    let [error, setError] = React.useState({})
+    let [error, setError] = React.useState()
 
     function inputHandler(event){
         setFormData((oldVal)=>{
@@ -18,7 +18,7 @@ export default function Login(props){
 
     function submitForm(event){
         let axiosData = {
-            url:"http://127.0.0.1:8000/accounts/login/",
+            url:`${props.url}/accounts/login/`,
             method:"POST",
             data: formData,
         }
@@ -31,9 +31,16 @@ export default function Login(props){
                 console.log(resp)}
         }).
         catch((err)=>{
-            setError(err.response)
-            console.log(error)
+            
+            console.log(err)
+            if (err.message === "Network Error"){
+                setError(err.message)
+            }else{
+                setError(err.response.data.error)
+            }
         })
+
+        console.log("hi",props.url)
     }
 
     React.useEffect(()=>{
@@ -53,7 +60,7 @@ export default function Login(props){
                 <span style={error ? {display:"block"} : {display:"none"}}
                 className="error-box">
 
-                    {error.data ? error.data.error : ""}
+                    {error ? error : ""}
 
                     </span>
                 <label htmlFor="username">
