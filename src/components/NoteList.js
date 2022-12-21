@@ -5,7 +5,7 @@ import NoteRow from "./list-comps/NoteRow"
 import addButton from "../images/add-button.png"
 import SideBar from "./list-comps/SideBar";
 import axios from "axios";
-
+import { redirect } from "react-router";
 
 export default function NoteList(props){
     let [noteList, setNoteList] = React.useState([])
@@ -25,18 +25,15 @@ export default function NoteList(props){
         setActiveComp(editorCompObj)
     }
 
-    React.useEffect(()=>{
-        if (localStorage.getItem('user-data') === null){
-            props.setActiveComp({name:"login", props:{}})
-        }else{
-            props.setUserInfo(JSON.parse(localStorage.getItem('user-data')))
-        }
-    },[])
+    function redirectFun(){
+        return redirect("/login")
+    }
 
 
 
     React.useEffect(()=>{
         console.log(noteList)
+        props.setUserInfo(JSON.parse(localStorage.getItem('user-data')))
         axios({
             url:`${props.url}/api/my-notes/`,
             method:"GET",
@@ -73,4 +70,20 @@ export default function NoteList(props){
             
         </div>
     )
+}
+
+
+export function action({request, params}){
+    console.log("This action was ran")
+    if (localStorage.getItem('user-data') === null){
+        return(redirect("/login"))
+    }
+}
+
+export function loader({request, params}){
+    console.log("The Loader was ran")
+    if (localStorage.getItem('user-data') === null){
+        console.log("You are not logged in")
+        return(redirect("/login"))
+    }
 }
