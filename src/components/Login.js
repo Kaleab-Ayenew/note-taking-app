@@ -2,11 +2,13 @@ import React from "react";
 import axios from "axios";
 import "./styles/Login.css"
 
+import { Form, redirect, useSubmit } from "react-router-dom";
+
 export default function Login(props){
 
     let [formData, setFormData] = React.useState({})
     let [error, setError] = React.useState()
-
+    const submit = useSubmit();
     function inputHandler(event){
         setFormData((oldVal)=>{
             let newVal = {...oldVal, [event.target.name]:event.target.value}
@@ -27,7 +29,7 @@ export default function Login(props){
             localStorage.setItem("user-data", JSON.stringify(resp.data))
 
             if (resp.status === 200){
-                props.setActiveComp({name:"list",props:{}})
+                submit({redirect:"../home"},{method:"post"})
                 console.log(resp)}
         }).
         catch((err)=>{
@@ -63,6 +65,7 @@ export default function Login(props){
                     {error ? error : ""}
 
                     </span>
+                
                 <label htmlFor="username">
                 Username
                 <input onChange={inputHandler} placeholder="Enter Username" type="text" name="username" id="username" />
@@ -74,8 +77,35 @@ export default function Login(props){
                 </label>
                 
                 <button onClick={submitForm}>Login</button>
+                
                 <span onClick={goToSignUp} className="create-account">Create an Account</span>
             </div>
         </div>
     )
 }
+function doThis(){
+    console.log("I am doing it")
+    return redirect("sign-up")
+}
+export async function action({request, params}){
+    let objFormData
+    console.log("The action was fired")
+    let formData = await request.formData()
+        // if (formData.has("redirect")){
+        //     console.log("this is the second",formData)
+        //     console.log(formData.get("redirect"))
+        //     return redirect("/home")
+        // }else{
+        //     return redirect("/sign-up")
+        // }
+
+    if (formData.has("redirect")){
+        return redirect(formData.get("redirect"))
+    }else{
+        return redirect("/login")
+    }
+
+    
+    
+}
+

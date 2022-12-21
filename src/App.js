@@ -11,6 +11,8 @@ import Main from './Main';
 import {action as noteListAction} from "./components/NoteList"
 import {loader as noteListLoader} from "./components/NoteList"
 
+import {action as loginAction} from "./components/Login"
+
 import { Outlet, Route, Routes } from 'react-router';
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -58,7 +60,7 @@ function App() {
           path: "login",
           element: <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
-          action: noteListAction,
+          action: loginAction,
           errorElement: null
         },
         {
