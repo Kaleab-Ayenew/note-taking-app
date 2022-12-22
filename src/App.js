@@ -12,6 +12,11 @@ import {action as noteListAction} from "./components/NoteList"
 import {loader as noteListLoader} from "./components/NoteList"
 
 import {action as loginAction} from "./components/Login"
+import {loader as loginLoader} from "./components/Login"
+
+import { indexLoader } from './components/NoteList';
+
+import { editorLoader } from './components/Editor';
 
 import { Outlet, Route, Routes } from 'react-router';
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -23,6 +28,8 @@ function App() {
   let [activeComp, setActiveComp] = React.useState({"name":"login","props":{}}) //Possible values are editor, list, login, signup
   let [userInfo, setUserInfo] = React.useState({})
   let [url, setUrl] = React.useState("http://192.168.43.227:8000")
+
+  localStorage.setItem("main-url", url)
   let compObj = {
     "editor": (<Editor data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>),
     "list":(<NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>),
@@ -44,22 +51,22 @@ function App() {
         {
           index: true,
           element: <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
-          loader: noteListLoader,
-          action: noteListAction,
+          loader: indexLoader,
+          action: null,
           errorElement: null
         },
         {
           path: "home",
           element: <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
-          loader: null,
-          action: null,
+          loader: noteListLoader,
+          action: noteListAction,
           errorElement: null
         },
         ,
         {
           path: "login",
           element: <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
-          loader: null,
+          loader: loginLoader,
           action: loginAction,
           errorElement: null
         },
@@ -71,9 +78,16 @@ function App() {
           errorElement: null
         },
         {
-          path: "editor",
-          element: <Editor data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          path: "new-note",
+          element: <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
+          action: null,
+          errorElement: null
+        },
+        {
+          path: "editor/:noteId",
+          element: <Editor isNew={false} data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          loader: editorLoader,
           action: null,
           errorElement: null
         },

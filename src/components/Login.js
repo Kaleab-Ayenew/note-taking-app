@@ -45,12 +45,6 @@ export default function Login(props){
         console.log("hi",props.url)
     }
 
-    React.useEffect(()=>{
-        if (localStorage.getItem('user-data') !== null){
-            props.setActiveComp({name:"list", props:{}})
-        }
-    },[])
-
     function goToSignUp(){
         props.setActiveComp({name:"signup", props:{}})
     }
@@ -91,21 +85,18 @@ export async function action({request, params}){
     let objFormData
     console.log("The action was fired")
     let formData = await request.formData()
-        // if (formData.has("redirect")){
-        //     console.log("this is the second",formData)
-        //     console.log(formData.get("redirect"))
-        //     return redirect("/home")
-        // }else{
-        //     return redirect("/sign-up")
-        // }
-
     if (formData.has("redirect")){
         return redirect(formData.get("redirect"))
     }else{
         return redirect("/login")
     }
-
-    
-    
 }
 
+
+export function loader(){
+    if (localStorage.getItem('user-data') !== null){
+        return redirect("../home")
+    }else{
+        return null
+    }
+}
