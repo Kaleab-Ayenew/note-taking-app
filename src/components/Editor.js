@@ -3,6 +3,7 @@ import EditBox from "./editors-comps/EditBox"
 import EditHeader from "./editors-comps/EditHeader"
 import "./styles/editor.css"
 import { useLoaderData } from "react-router"
+import { redirect } from "react-router"
 
 export default function Editor(props){
     let [editorContent, setEditorContent] = React.useState({title:"", content:""})
@@ -49,4 +50,12 @@ export default function Editor(props){
 
 export async function editorLoader({request, params}){
     return (params.noteId)
+}
+
+export async function editorAction({request, params}){
+    let formData = await request.formData();
+    console.log("[Editor action]this is the redirect form data", formData)
+    if(formData.has("redirect")){
+        return redirect(formData.get("redirect"))
+    }
 }

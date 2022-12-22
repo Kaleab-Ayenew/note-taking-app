@@ -16,7 +16,7 @@ import {loader as loginLoader} from "./components/Login"
 
 import { indexLoader } from './components/NoteList';
 
-import { editorLoader } from './components/Editor';
+import { editorLoader, editorAction } from './components/Editor';
 
 import { Outlet, Route, Routes } from 'react-router';
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -88,7 +88,7 @@ function App() {
           path: "editor/:noteId",
           element: <Editor isNew={false} data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: editorLoader,
-          action: null,
+          action: editorAction,
           errorElement: null
         },
         {
