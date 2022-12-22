@@ -1,10 +1,11 @@
 import React from "react";
-
+import { useNavigate } from "react-router";
 
 export default function SideBar(props){
+    const navigate = useNavigate()
     function logout(){
         localStorage.removeItem("user-data")
-        props.setActiveComp({name:"login",props:{}})
+        navigate("/login")
     }
     let userData = localStorage.getItem("user-data") ? JSON.parse(localStorage.getItem("user-data")) : null
     return (

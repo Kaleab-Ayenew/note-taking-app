@@ -11,6 +11,7 @@ export default function Editor(props){
     let endPoint, isNew;
     let mainUrl = localStorage.getItem("main-url")
     let noteId = useLoaderData()
+
     if (props.isNew){
         endPoint = `${mainUrl}/api/my-notes/`
         isNew = true
@@ -49,13 +50,17 @@ export default function Editor(props){
 }
 
 export async function editorLoader({request, params}){
+    if (localStorage.getItem("user-data")===null){
+        redirect("/login")
+    }
     return (params.noteId)
+    console.log(params)
 }
 
-export async function editorAction({request, params}){
-    let formData = await request.formData();
-    console.log("[Editor action]this is the redirect form data", formData)
-    if(formData.has("redirect")){
-        return redirect(formData.get("redirect"))
+export function newEditLoader(){
+    if (localStorage.getItem("user-data") === null){
+        return redirect("/login")
     }
+
+    return null
 }

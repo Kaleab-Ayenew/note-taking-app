@@ -2,19 +2,28 @@ import React from "react";
 import axios from "axios";
 import "./styles/Login.css"
 
-import { Form, redirect, useSubmit } from "react-router-dom";
+import { Form, redirect, useSubmit, useNavigate, Link } from "react-router-dom";
 
 export default function Login(props){
 
     let [formData, setFormData] = React.useState({})
     let [error, setError] = React.useState()
-    const submit = useSubmit();
+
+    const navigate = useNavigate()
+    
+
+    React.useEffect(()=>{
+        if (localStorage.getItem("user-data") !== null){
+            navigate("/home")
+        }
+    },[])
+    
+
     function inputHandler(event){
         setFormData((oldVal)=>{
             let newVal = {...oldVal, [event.target.name]:event.target.value}
             return newVal
         })
-        console.log(formData)
     }
 
 
@@ -29,7 +38,7 @@ export default function Login(props){
             localStorage.setItem("user-data", JSON.stringify(resp.data))
 
             if (resp.status === 200){
-                submit({redirect:"../home"},{method:"post"})
+                navigate("/home")
                 console.log(resp)}
         }).
         catch((err)=>{
@@ -41,12 +50,6 @@ export default function Login(props){
                 setError(err.response.data.error)
             }
         })
-
-        console.log("hi",props.url)
-    }
-
-    function goToSignUp(){
-        props.setActiveComp({name:"signup", props:{}})
     }
 
     return(
@@ -72,31 +75,10 @@ export default function Login(props){
                 
                 <button onClick={submitForm}>Login</button>
                 
-                <span onClick={goToSignUp} className="create-account">Create an Account</span>
+                    <span className="create-account"><Link to={"/sign-up"}>Create an Account</Link></span>
+                
+                
             </div>
         </div>
     )
-}
-function doThis(){
-    console.log("I am doing it")
-    return redirect("sign-up")
-}
-export async function action({request, params}){
-    let objFormData
-    console.log("The action was fired")
-    let formData = await request.formData()
-    if (formData.has("redirect")){
-        return redirect(formData.get("redirect"))
-    }else{
-        return redirect("/login")
-    }
-}
-
-
-export function loader(){
-    if (localStorage.getItem('user-data') !== null){
-        return redirect("../home")
-    }else{
-        return null
-    }
 }

@@ -22,7 +22,7 @@ export default function EditBox(props){
     },[])
 
     React.useEffect(()=>{
-        console.log("An effect has been triggered")
+        
         let axiosData = {
             url:props.endPoint,
             method: props.isNew ? "POST" : "PUT" ,

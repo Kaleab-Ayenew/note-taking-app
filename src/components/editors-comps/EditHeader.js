@@ -1,12 +1,12 @@
 import axios from "axios"
 import React from "react"
 
-import { useSubmit } from "react-router-dom"
+import { useSubmit, useNavigate } from "react-router-dom"
 
 export default function EditHeader(props){
     const saveState = props.saveState
     const setSaveState = props.setSaveState
-    const submit = useSubmit()
+    const navigate = useNavigate()
     function deleteHandler(event){
         let axiosData = {
             url: props.endPoint,
@@ -24,11 +24,12 @@ export default function EditHeader(props){
             console.log(err)
         })
 
-        submit({redirect:"../home"},{method:"post"})
+        navigate("/home")
     }
 
     function backToList(event){
-        submit({redirect:"../home"},{method:"post"})
+        
+        navigate("/home")
     }
 
     return(
