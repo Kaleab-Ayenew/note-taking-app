@@ -11,7 +11,7 @@ import {loader as noteListLoader} from "./components/NoteList"
 
 import { editorLoader, newEditLoader } from './components/Editor';
 
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 
 
 
@@ -26,42 +26,42 @@ function App() {
       
         {
           path: "/",
-          element: <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: localStorage.getItem("user-data") ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: noteListLoader,
           action: null,
           errorElement: null
         },
         {
           path: "/home",
-          element: <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: localStorage.getItem("user-data") ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: noteListLoader,
           action: null,
           errorElement: null
         },
         {
           path: "/login",
-          element: <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: localStorage.getItem("user-data") ? <Navigate to="/home"/> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up",
-          element: <Signup data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element:  localStorage.getItem("user-data") ? <Navigate to="/home"/> : <Signup data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/new-note",
-          element: <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: localStorage.getItem("user-data") ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: newEditLoader,
           action: null,
           errorElement: null
         },
         {
           path: "/editor/:noteId",
-          element: <Editor isNew={false} data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: localStorage.getItem("user-data") ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: editorLoader,
           action: null,
           errorElement: null
@@ -69,6 +69,13 @@ function App() {
         {
           path: "/sign-up-success",
           element: <SignUpDone data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp} />,
+          loader: null,
+          action: null,
+          errorElement: null
+        },
+        {
+          path: "/test",
+          element: localStorage.getItem("user-data") ? <SignUpDone/> : <Navigate to="/login" replace={true}/>,
           loader: null,
           action: null,
           errorElement: null
