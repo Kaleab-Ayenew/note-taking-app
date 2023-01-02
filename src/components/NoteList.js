@@ -8,29 +8,28 @@ import axios from "axios";
 import { redirect } from "react-router";
 import {  useNavigate } from "react-router-dom";
 
+//Redux Imports
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllNotes, fetchNotes } from "../features/notes/notesSlice";
+
 export default function NoteList(props){
-    let [noteList, setNoteList] = React.useState([])
+
     let activeComp = props.activeComp
     let setActiveComp = props.setActiveComp
-    let stateArray = [noteList, setNoteList, activeComp, setActiveComp]
+    let stateArray = [activeComp, setActiveComp]
 
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const noteList = useSelector(selectAllNotes)
+
+
     if(localStorage.getItem("user-data")===null){
         navigate("/login")
     }
     React.useEffect(()=>{
-            axios({
-                url:`${localStorage.getItem('main-url')}/api/my-notes/`,
-                method:"GET",
-                headers:{
-                    authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
-                }
-            }).then((resp)=>{
-                setNoteList(resp.data)
-            }).catch((err)=>{
-                throw new Error(`Couldn't fetch data: ${err}`)
-            })
+        dispatch(fetchNotes())
+        console.log("The Note List effect was run!")
     },[])
 
     function openEditor(event){

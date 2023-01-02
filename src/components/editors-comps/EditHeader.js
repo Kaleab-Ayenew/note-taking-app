@@ -3,27 +3,21 @@ import React from "react"
 
 import { useSubmit, useNavigate } from "react-router-dom"
 
+//Redux Imports
+
+import { deleteNote } from "../../features/notes/notesSlice"
+import { useDispatch } from "react-redux"
+
 export default function EditHeader(props){
     const saveState = props.saveState
     const setSaveState = props.setSaveState
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+
     function deleteHandler(event){
-        let axiosData = {
-            url: props.endPoint,
-            method: "DELETE",
-            headers:{
-                authorization: `Token ${JSON.parse(localStorage.getItem('user-data')).token}`
-            }
-        }
-
-        axios(axiosData)
-        .then((resp)=>{
-            console.log(resp.data)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-
+        dispatch(deleteNote(props.noteId))
+        console.log("A note was deleted")
         navigate("/home")
     }
 

@@ -25,7 +25,7 @@ export default function Editor(props){
         <div className="editor-main">
             <EditHeader 
                 isNew={isNew} 
-                endPoint={endPoint} 
+                noteId = {noteId}
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
                 saveState={saveState}
@@ -37,7 +37,8 @@ export default function Editor(props){
             />
 
             <EditBox  
-                isNew={isNew} 
+                isNew={isNew}
+                noteId = {noteId} 
                 endPoint={endPoint} 
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
@@ -54,7 +55,6 @@ export async function editorLoader({request, params}){
         redirect("/login")
     }
     return (params.noteId)
-    console.log(params)
 }
 
 export function newEditLoader(){
