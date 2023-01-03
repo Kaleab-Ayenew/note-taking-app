@@ -23,10 +23,8 @@ export default function NoteList(props){
 
     const noteList = useSelector(selectAllNotes)
 
+    console.log("This was printed from the note page: ", localStorage.getItem("user-data"))
 
-    if(localStorage.getItem("user-data")===null){
-        navigate("/login")
-    }
     React.useEffect(()=>{
         dispatch(fetchNotes())
         console.log("The Note List effect was run!")
@@ -63,10 +61,3 @@ export default function NoteList(props){
     )
 }
 
-
-export async function loader({request, params}){
-    if (localStorage.getItem('user-data') === null){
-        return(redirect("/login"))
-    }
-    return null
-}

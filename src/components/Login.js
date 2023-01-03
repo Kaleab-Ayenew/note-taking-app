@@ -4,21 +4,19 @@ import "./styles/Login.css"
 
 import { Form, redirect, useSubmit, useNavigate, Link } from "react-router-dom";
 
+//Redux Imports
+
+import { createUserData } from "../app/userData";
+import { useDispatch } from "react-redux";
+
 export default function Login(props){
 
     let [formData, setFormData] = React.useState({})
     let [error, setError] = React.useState()
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
-
-    React.useEffect(()=>{
-        if (localStorage.getItem("user-data") !== null){
-            navigate("/home")
-        }
-    },[])
-    
-
     function inputHandler(event){
         setFormData((oldVal)=>{
             let newVal = {...oldVal, [event.target.name]:event.target.value}
@@ -35,11 +33,16 @@ export default function Login(props){
         }
         axios(axiosData).
         then((resp)=>{
-            localStorage.setItem("user-data", JSON.stringify(resp.data))
 
             if (resp.status === 200){
-                navigate("/home")
-                console.log(resp)}
+                localStorage.setItem("user-data", JSON.stringify(resp.data))
+                dispatch(createUserData(resp.data))
+                console.log("Succesfully Logged In", resp.data)
+                navigate("/home", {replace:true})
+                console.log(localStorage.getItem("user-data"), "This was printed from Login")}
+            else{
+                console.log("Login Has FAiled", resp.data)
+            }
         }).
         catch((err)=>{
             

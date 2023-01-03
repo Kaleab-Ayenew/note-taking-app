@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
@@ -9,21 +9,6 @@ export const fetchNotes = createAsyncThunk("notes/fetchNotes", async ()=>{
         const response =  await axios({
             url:`${localStorage.getItem('main-url')}/api/my-notes/`,
             method:"GET",
-            headers:{
-                authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
-            }
-        })
-        return response.data
-    }catch(err){
-        throw new Error(err)
-    }
-})
-
-export const deleteNote = createAsyncThunk("notes/deleteNote", async (noteId)=>{
-    try{
-        const response =  await axios({
-            url:`${localStorage.getItem('main-url')}/api/note-content/${noteId}/`,
-            method:"DELETE",
             headers:{
                 authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
             }
@@ -47,10 +32,6 @@ const notesSlice = createSlice({
         builder.
         addCase(fetchNotes.fulfilled, (state, action)=>{
             return action.payload
-        }).
-        addCase(deleteNote.fulfilled, (state, action)=>{
-            console.log("A note has been deleted", action.payload)
-            return state
         })
     }
 })
@@ -62,6 +43,4 @@ export const {addNote} = notesSlice.actions;
 
 //Selector Functions
 
-export const selectAllNotes = (state)=>{
-    return state.notes
-}
+export const selectAllNotes = createSelector([(state)=>state.notes],(notes)=>notes)

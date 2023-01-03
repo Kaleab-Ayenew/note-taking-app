@@ -25,6 +25,7 @@ export default function Editor(props){
         <div className="editor-main">
             <EditHeader 
                 isNew={isNew} 
+                endPoint = {endPoint}
                 noteId = {noteId}
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
@@ -38,8 +39,8 @@ export default function Editor(props){
 
             <EditBox  
                 isNew={isNew}
+                endPoint = {endPoint}
                 noteId = {noteId} 
-                endPoint={endPoint} 
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
                 saveState={saveState}

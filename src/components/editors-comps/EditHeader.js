@@ -5,7 +5,6 @@ import { useSubmit, useNavigate } from "react-router-dom"
 
 //Redux Imports
 
-import { deleteNote } from "../../features/notes/notesSlice"
 import { useDispatch } from "react-redux"
 
 export default function EditHeader(props){
@@ -16,8 +15,18 @@ export default function EditHeader(props){
 
 
     function deleteHandler(event){
-        dispatch(deleteNote(props.noteId))
-        console.log("A note was deleted")
+        const axiosData = {
+            url: props.endPoint,
+            method:"DELETE",
+            headers:{
+                authorization: `Token ${localStorage.getItem("user-data").token}`
+            }
+        }
+        axios(axiosData).
+        then(resp=>{console.log(resp.data)}).
+        catch((err)=>{
+            console.log(err)
+        })
         navigate("/home")
     }
 

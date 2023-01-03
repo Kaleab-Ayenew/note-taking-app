@@ -5,6 +5,7 @@ export default function SideBar(props){
     const navigate = useNavigate()
     function logout(){
         localStorage.removeItem("user-data")
+        console.log("Removed User Data")
         navigate("/login")
     }
     let userData = localStorage.getItem("user-data") ? JSON.parse(localStorage.getItem("user-data")) : null
