@@ -6,17 +6,17 @@ import Login from "./components/Login"
 import React from 'react'
 import Signup from './components/SignUp';
 import SignUpDone from './components/SignUpDone';
-
-import {loader as noteListLoader} from "./components/NoteList"
+import Test from './components/test';
 
 import { editorLoader, newEditLoader } from './components/Editor';
 
-import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';//
+import { createBrowserRouter, createBro, Navigate, RouterProvider} from 'react-router-dom';//
 
 
 //Redux Imports
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserData, createUserData, deleteUserData } from "./app/userData"
 
 
 
@@ -25,48 +25,64 @@ function App() {
   let [userInfo, setUserInfo] = React.useState({})
   let [url, setUrl] = React.useState("http://192.168.43.227:8000")
 
-  localStorage.setItem("main-url", url)
-  console.log(localStorage.getItem("user-data"), "This was printed from the App page")
+  const dispatch = useDispatch()
+
+  const userData = useSelector(getUserData)
+
+  React.useEffect(()=>{
+    if (localStorage.getItem("user-data") !== null && userData === null){
+      const parsedData = JSON.parse(localStorage.getItem("user-data"))
+      dispatch(createUserData(parsedData))
+      console.log("The userData was populated with data from the local Storage")
+    }
+
+    localStorage.setItem("main-url", url)
+    console.log(localStorage.getItem("user-data"), "This was printed from the App page")
+  },[])
+  
+
+  
+  
   const router = createBrowserRouter([
       
         {
           path: "/",
-          element: localStorage.getItem("user-data") ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/home",
-          element: <>{localStorage.getItem("user-data")}{console.log(localStorage.getItem("user-data"), "this was printed form the main navigation")}</>,//localStorage.getItem("user-data") !== null ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/error-testing/Home"/>,
+          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/error-testing/Home"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/login",
-          element: localStorage.getItem("user-data") ? <Navigate replace to="/home"/> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: userData ? <Navigate replace to={`/error-testing/${localStorage.getItem("user-data")}`} /> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up",
-          element:  localStorage.getItem("user-data") ? <Navigate to="/home"/> : <Signup data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element:  userData ? <Navigate to="/home"/> : <Signup data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/new-note",
-          element: localStorage.getItem("user-data") ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: userData ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: newEditLoader,
           action: null,
           errorElement: null
         },
         {
           path: "/editor/:noteId",
-          element: localStorage.getItem("user-data") ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: userData ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: editorLoader,
           action: null,
           errorElement: null
@@ -80,7 +96,7 @@ function App() {
         },
         {
           path: "/test",
-          element: localStorage.getItem("user-data") ? <SignUpDone/> : <Navigate to="/login" replace={true}/>,
+          element: <Test />,
           loader: null,
           action: null,
           errorElement: null

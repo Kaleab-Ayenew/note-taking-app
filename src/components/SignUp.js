@@ -44,12 +44,6 @@ export default function Signup(props){
         
     }
 
-    React.useEffect(()=>{
-        if (localStorage.getItem('user-data') !== null){
-            navigate("/home")
-        }
-    },[])
-
     return(
         <div className="signup-main">
             <div className="signup-box">

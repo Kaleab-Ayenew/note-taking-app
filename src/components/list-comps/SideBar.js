@@ -1,14 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
+//Reduc Imports
+import { deleteUserData, getUserData } from "../../app/userData";
+import { useDispatch, useSelector } from "react-redux";
+
+
 export default function SideBar(props){
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const userData = useSelector(getUserData);
+
+
     function logout(){
         localStorage.removeItem("user-data")
-        console.log("Removed User Data")
+        console.log("Removed User Data, this is the localStorage now: ", localStorage.getItem("user-data"))
+        dispatch(deleteUserData())
+        console.log("LOGOUT: HERE IS THE userData state: ", userData)
         navigate("/login")
     }
-    let userData = localStorage.getItem("user-data") ? JSON.parse(localStorage.getItem("user-data")) : null
+    
     return (
         <div className="side-bar-main">
             <div className="profile-box">
