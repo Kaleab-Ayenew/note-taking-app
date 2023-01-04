@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 //Reduc Imports
 import { deleteUserData, getUserData } from "../../app/userData";
+import { deleteAllNotes } from "../../features/notes/notesSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -12,11 +13,11 @@ export default function SideBar(props){
 
     const userData = useSelector(getUserData);
 
-
     function logout(){
         localStorage.removeItem("user-data")
         console.log("Removed User Data, this is the localStorage now: ", localStorage.getItem("user-data"))
         dispatch(deleteUserData())
+        dispatch(deleteAllNotes())
         console.log("LOGOUT: HERE IS THE userData state: ", userData)
         navigate("/login")
     }

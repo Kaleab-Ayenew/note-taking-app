@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 export default function EditBox(props){
-    const saveState = props.saveState
-    const setSaveState = props.setSaveState
-    const editorContent = props.editorContent
-    const setEditorContent = props.setEditorContent
+    const [saveState, setSaveState] = React.useState("no")
+    let [editorContent, setEditorContent] = React.useState({title:"", content:""})
     React.useEffect(()=>{
         if (!props.isNew){
             axios({
@@ -21,7 +19,7 @@ export default function EditBox(props){
         }
     },[])
 
-    React.useEffect(()=>{
+    const saveHandler = ()=>{
         
         let axiosData = {
             url:props.endPoint,
@@ -37,7 +35,7 @@ export default function EditBox(props){
             console.log(err)
         })
         
-    },[saveState])
+    }
     
 
     function editHandler(event){
@@ -46,15 +44,7 @@ export default function EditBox(props){
             let edited = {...oldVal,[event.target.name]:event.target.value}
             return edited
         })
-        console.log(props)
-        console.log(typeof(setSaveState))
-        setSaveState("")    
-    }
-
-    function saveHandler(event){
-        setSaveState("saved")
-        console.log("The Content Was Saved")
-        console.log(saveState)
+        setSaveState("no")    
     }
 
     return (

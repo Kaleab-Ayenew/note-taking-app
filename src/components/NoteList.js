@@ -4,8 +4,6 @@ import Header from "./list-comps/Header"
 import NoteRow from "./list-comps/NoteRow"
 import addButton from "../images/add-button.png"
 import SideBar from "./list-comps/SideBar";
-import axios from "axios";
-import { redirect } from "react-router";
 import {  useNavigate } from "react-router-dom";
 
 //Redux Imports
@@ -14,20 +12,13 @@ import { selectAllNotes, fetchNotes } from "../features/notes/notesSlice";
 
 export default function NoteList(props){
 
-    let activeComp = props.activeComp
-    let setActiveComp = props.setActiveComp
-    let stateArray = [activeComp, setActiveComp]
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const noteList = useSelector(selectAllNotes)
 
-    console.log("This was printed from the note page: ", localStorage.getItem("user-data"))
-
     React.useEffect(()=>{
         dispatch(fetchNotes())
-        console.log("The Note List effect was run!")
     },[])
 
     function openEditor(event){
@@ -41,18 +32,23 @@ export default function NoteList(props){
     }
 
     let noteCompList = noteList.map((item,index)=>{
-        return(<NoteRow clickHandler={openEditor} stateArray={stateArray} noteList={noteList} key={index} props={item} />)
+        return(<NoteRow clickHandler={openEditor} noteList={noteList} key={index} props={item} />)
     })
 
     return(
         <div className="note-list-main">
+            {/* This is the side bar*/}
             <SideBar {...props}/>
+
+            {/* This is the header*/}
             <Header {...props}/>
 
+            {/* This is the notes list */}
             <div className="note-list-column">
                 {noteCompList}
             </div>
 
+            {/* This is the add button */}
             <div className="add-button">
                 <img onClick={openEditor} name="addBut" alt="Add Buttion" src={addButton}/>
             </div>

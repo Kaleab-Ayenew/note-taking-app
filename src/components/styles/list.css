@@ -169,6 +169,7 @@
     transition: 0.5s ease;
     visibility: hidden;
     opacity: 0;
+    z-index: 5;
 }
 
 .side-bar-main > .profile-box{
@@ -195,6 +196,11 @@
     line-height: 60px;
 }
 
+.side-bar-main > .profile-box > span#logout-span:hover{
+    background-color: rgb(55, 55, 55);
+    cursor: pointer;
+}
+
 .side-bar-main > .profile-box > span#logout-span:active{
     background-color: rgb(45, 45, 45);
 }
@@ -207,12 +213,12 @@
 .side-bar-button{
     width: 25px;
     height: 20px;
-    z-index: 5;
     position: fixed;
     left: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 11;
 }
 
 .side-bar-button > div{

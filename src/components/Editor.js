@@ -29,8 +29,6 @@ export default function Editor(props){
                 noteId = {noteId}
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
-                saveState={saveState}
-                setSaveState={setSaveState}
                 setActiveComp={props.setActiveComp}
                 activeComp={props.activeComp}
                 {...props}
@@ -43,8 +41,6 @@ export default function Editor(props){
                 noteId = {noteId} 
                 editorContent={editorContent} 
                 setEditorContent={setEditorContent}
-                saveState={saveState}
-                setSaveState={setSaveState}
                 {...props}
             />
         </div>
@@ -56,12 +52,4 @@ export async function editorLoader({request, params}){
         redirect("/login")
     }
     return (params.noteId)
-}
-
-export function newEditLoader(){
-    if (localStorage.getItem("user-data") === null){
-        return redirect("/login")
-    }
-
-    return null
 }

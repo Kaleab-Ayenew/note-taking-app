@@ -27,6 +27,9 @@ const notesSlice = createSlice({
         // addNote:(state, action)=>{
         //     state.push(action.payload)
         // },
+        deleteAllNotes:(state, action)=>{
+            return initialState
+        }
     },
     extraReducers: (builder)=>{
         builder.
@@ -38,7 +41,7 @@ const notesSlice = createSlice({
 
 export default notesSlice.reducer;
 
-export const {addNote} = notesSlice.actions;
+export const {addNote, deleteAllNotes} = notesSlice.actions;
 
 
 //Selector Functions

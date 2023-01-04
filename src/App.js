@@ -8,9 +8,9 @@ import Signup from './components/SignUp';
 import SignUpDone from './components/SignUpDone';
 import Test from './components/test';
 
-import { editorLoader, newEditLoader } from './components/Editor';
+import { editorLoader } from './components/Editor';
 
-import { createBrowserRouter, createBro, Navigate, RouterProvider} from 'react-router-dom';//
+import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';//
 
 
 //Redux Imports
@@ -54,14 +54,14 @@ function App() {
         },
         {
           path: "/home",
-          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/error-testing/Home"/>,
+          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/login",
-          element: userData ? <Navigate replace to={`/error-testing/${localStorage.getItem("user-data")}`} /> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: userData ? <Navigate replace to="/home" /> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
           loader: null,
           action: null,
           errorElement: null
@@ -76,7 +76,7 @@ function App() {
         {
           path: "/new-note",
           element: userData ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
-          loader: newEditLoader,
+          loader: null,
           action: null,
           errorElement: null
         },
