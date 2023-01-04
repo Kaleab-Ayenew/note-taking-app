@@ -31,6 +31,7 @@ export default function EditBox(props){
         }
         axios(axiosData).then((resp)=>{
             setEditorContent(resp.data)
+            setSaveState("yes")
         }).catch((err)=>{
             console.log(err)
         })
@@ -52,7 +53,7 @@ export default function EditBox(props){
             <input name="title" onChange={editHandler} value={editorContent.title} placeholder="Your Title" type="text"/>
             <textarea name="content" onChange={editHandler} value={editorContent.content} placeholder="Write a new note..." />
             
-            <button  onClick={saveHandler} id="save" className={`save-button ${saveState ? "saved-button" : ""}`}>
+            <button  disabled={saveState === "yes"} onClick={saveHandler} id="save" className={`save-button ${saveState === "yes" ? "saved-button" : ""}`}>
                     Save
                 </button>
         </div>

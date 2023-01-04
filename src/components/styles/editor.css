@@ -121,3 +121,7 @@
     background-color: rgb(108, 108, 108);
     color: white;
 }
+
+.saved-button{
+    background-color: gray;
+}

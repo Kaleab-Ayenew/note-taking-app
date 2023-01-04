@@ -1,28 +1,25 @@
-
+import React from 'react'
 import './App.css';
+
+//Component Imports
 import NoteList from "./components/NoteList"
 import Editor from "./components/Editor"
 import Login from "./components/Login"
-import React from 'react'
 import Signup from './components/SignUp';
 import SignUpDone from './components/SignUpDone';
 import Test from './components/test';
-
-import { editorLoader } from './components/Editor';
 
 import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';//
 
 
 //Redux Imports
-
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserData, createUserData } from "./app/userData"
 
 
 
 function App() {
-  let [userInfo, setUserInfo] = React.useState({})
-  let [url, setUrl] = React.useState("http://192.168.43.227:8000")
+  let [url] = React.useState("http://192.168.43.227:8000")
 
   const dispatch = useDispatch()
 
@@ -40,7 +37,7 @@ function App() {
   }
   
   checkUser()
-  
+
   const loggedIn = userData !== null
   
   
@@ -48,49 +45,49 @@ function App() {
       
         {
           path: "/",
-          element: loggedIn ? <NoteList url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
+          element: loggedIn ? <NoteList /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/home",
-          element: loggedIn ? <NoteList url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
+          element: loggedIn ? <NoteList /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/login",
-          element: loggedIn ? <Navigate replace to="/home" /> : <Login  url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} />,
+          element: loggedIn ? <Navigate replace to="/home" /> : <Login />,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up",
-          element:  loggedIn ? <Navigate to="/home"/> : <Signup url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} />,
+          element:  loggedIn ? <Navigate to="/home"/> : <Signup />,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/new-note",
-          element: loggedIn ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
+          element: loggedIn ? <Editor isNew={true} /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/editor/:noteId",
-          element: loggedIn ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
-          loader: editorLoader,
+          element: loggedIn ? <Editor isNew={false} /> : <Navigate to="/login"/>,
+          loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up-success",
-          element: <SignUpDone url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo}  />,
+          element: <SignUpDone />,
           loader: null,
           action: null,
           errorElement: null
@@ -101,15 +98,6 @@ function App() {
           loader: null,
           action: null,
           errorElement: null
-        },
-        {
-          path: "/error-testing/:source",
-          element: <>This is the Testing of the Error Element</>,
-          loader: ({params})=>{
-            const getData = params['source']
-            console.log("This error was generated from ", getData)
-            return null
-          }
         }
   ])
   
