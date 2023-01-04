@@ -7,7 +7,6 @@ import { redirect } from "react-router"
 
 export default function Editor(props){
     let [editorContent, setEditorContent] = React.useState({title:"", content:""})
-    let [saveState, setSaveState] = React.useState("")
     let endPoint, isNew;
     let mainUrl = localStorage.getItem("main-url")
     let noteId = useLoaderData()
@@ -48,8 +47,5 @@ export default function Editor(props){
 }
 
 export async function editorLoader({request, params}){
-    if (localStorage.getItem("user-data")===null){
-        redirect("/login")
-    }
     return (params.noteId)
 }

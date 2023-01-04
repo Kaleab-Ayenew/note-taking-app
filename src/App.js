@@ -16,12 +16,11 @@ import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 //Redux Imports
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserData, createUserData, deleteUserData } from "./app/userData"
+import { getUserData, createUserData } from "./app/userData"
 
 
 
 function App() {
-  let [activeComp, setActiveComp] = React.useState({"name":"login","props":{}}) //Possible values are editor, list, login, signup
   let [userInfo, setUserInfo] = React.useState({})
   let [url, setUrl] = React.useState("http://192.168.43.227:8000")
 
@@ -29,7 +28,7 @@ function App() {
 
   const userData = useSelector(getUserData)
 
-  React.useEffect(()=>{
+  const checkUser = ()=>{
     if (localStorage.getItem("user-data") !== null && userData === null){
       const parsedData = JSON.parse(localStorage.getItem("user-data"))
       dispatch(createUserData(parsedData))
@@ -38,58 +37,60 @@ function App() {
 
     localStorage.setItem("main-url", url)
     console.log(localStorage.getItem("user-data"), "This was printed from the App page")
-  },[])
+  }
   
-
+  checkUser()
+  
+  const loggedIn = userData !== null
   
   
   const router = createBrowserRouter([
       
         {
           path: "/",
-          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: loggedIn ? <NoteList url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/home",
-          element: userData ? <NoteList data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: loggedIn ? <NoteList url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/login",
-          element: userData ? <Navigate replace to="/home" /> : <Login data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element: loggedIn ? <Navigate replace to="/home" /> : <Login  url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} />,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up",
-          element:  userData ? <Navigate to="/home"/> : <Signup data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/>,
+          element:  loggedIn ? <Navigate to="/home"/> : <Signup url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} />,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/new-note",
-          element: userData ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: loggedIn ? <Editor isNew={true} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
           errorElement: null
         },
         {
           path: "/editor/:noteId",
-          element: userData ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp}/> : <Navigate to="/login"/>,
+          element: loggedIn ? <Editor isNew={false} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} /> : <Navigate to="/login"/>,
           loader: editorLoader,
           action: null,
           errorElement: null
         },
         {
           path: "/sign-up-success",
-          element: <SignUpDone data={activeComp.props} url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo} activeComp={activeComp} setActiveComp={setActiveComp} />,
+          element: <SignUpDone url={url} setUrl={setUrl} userInfo={userInfo} setUserInfo={setUserInfo}  />,
           loader: null,
           action: null,
           errorElement: null
