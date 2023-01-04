@@ -1,8 +1,24 @@
 import React from "react";
 import axios from "axios";
+import { useRouteError } from "react-router";
+import { json } from "react-router";
+
 export default function EditBox(props){
-    const [saveState, setSaveState] = React.useState("no")
+    const [saveState, setSaveState] = React.useState("yes")
     let [editorContent, setEditorContent] = React.useState({title:"", content:""})
+    const [error, setError] = React.useState({})
+
+    if (error){
+        console.log(error)
+        throw new json({
+            message: error.message,
+            // data: error.response.data,
+        },
+        {
+            status: error.status
+        })
+    }
+
     React.useEffect(()=>{
         if (!props.isNew){
             axios({
@@ -12,9 +28,13 @@ export default function EditBox(props){
                     authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
                 }
             }).then((resp)=>{
-                setEditorContent(resp.data)
+                if (resp.ok){
+                    setEditorContent(resp.data)
+                }
+                
             }).catch((err)=>{
-                console.log(err)
+                console.log(err, err.message, "This Exception was raised.")
+                setError(err)
             })
         }
     },[])
@@ -34,6 +54,8 @@ export default function EditBox(props){
             setSaveState("yes")
         }).catch((err)=>{
             console.log(err)
+            setError(err)
+
         })
         
     }

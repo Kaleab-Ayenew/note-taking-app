@@ -8,6 +8,7 @@ import Login from "./components/Login"
 import Signup from './components/SignUp';
 import SignUpDone from './components/SignUpDone';
 import Test from './components/test';
+import ErrorPage from './components/ErrorPage';
 
 import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';//
 
@@ -83,7 +84,7 @@ function App() {
           element: loggedIn ? <Editor isNew={false} /> : <Navigate to="/login"/>,
           loader: null,
           action: null,
-          errorElement: null
+          errorElement: <ErrorPage />
         },
         {
           path: "/sign-up-success",
