@@ -1,9 +1,12 @@
 import React from "react";
 import "./styles/signup-done.css"
+import { useNavigate } from "react-router";
+
 
 export default function SignUpDone(props){
+    const navigate = useNavigate()
     function backToLogin(event){
-        props.setActiveComp({name:"login",props:{}})
+        navigate("/login")
     }
     return (
         <div className="sign-up-done-main">

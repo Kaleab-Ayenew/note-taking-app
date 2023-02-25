@@ -5,7 +5,8 @@ import NoteRow from "./list-comps/NoteRow"
 import addButton from "../images/add-button.png"
 import SideBar from "./list-comps/SideBar";
 import axios from "axios";
-
+import { redirect } from "react-router";
+import {  useNavigate } from "react-router-dom";
 
 export default function NoteList(props){
     let [noteList, setNoteList] = React.useState([])
@@ -13,51 +14,39 @@ export default function NoteList(props){
     let setActiveComp = props.setActiveComp
     let stateArray = [noteList, setNoteList, activeComp, setActiveComp]
 
+
+    const navigate = useNavigate()
+    if(localStorage.getItem("user-data")===null){
+        navigate("/login")
+    }
+    React.useEffect(()=>{
+            axios({
+                url:`${localStorage.getItem('main-url')}/api/my-notes/`,
+                method:"GET",
+                headers:{
+                    authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
+                }
+            }).then((resp)=>{
+                setNoteList(resp.data)
+            }).catch((err)=>{
+                throw new Error(`Couldn't fetch data: ${err}`)
+            })
+    },[])
+
     function openEditor(event){
         let isNew = (event.currentTarget.name === "addBut")
-        console.log(event.currentTarget.name)
-        let editorCompObj = {
-            name: "editor",
-            props:{
-                id: (isNew ? "add" : event.currentTarget.id)
-            }
-        }
-        setActiveComp(editorCompObj)
-    }
-
-    React.useEffect(()=>{
-        if (localStorage.getItem('user-data') === null){
-            props.setActiveComp({name:"login", props:{}})
+        if (isNew){
+            navigate("/new-note")
         }else{
-            props.setUserInfo(JSON.parse(localStorage.getItem('user-data')))
+            let noteId = event.currentTarget.id
+            navigate(`/editor/${noteId}`)
         }
-    },[])
-
-
-
-    React.useEffect(()=>{
-        console.log(noteList)
-        axios({
-            url:`${props.url}/api/my-notes/`,
-            method:"GET",
-            headers:{
-                authorization:`Token ${JSON.parse(localStorage.getItem('user-data')).token}`
-            }
-        }).then((resp)=>{
-            setNoteList(resp.data)
-        }).catch((err)=>{
-            console.log(err)
-        })
-    },[])
+    }
 
     let noteCompList = noteList.map((item,index)=>{
         return(<NoteRow clickHandler={openEditor} stateArray={stateArray} noteList={noteList} key={index} props={item} />)
     })
 
-    function changeActiveComp(event){
-        return null
-    }
-    
     return(
         <div className="note-list-main">
             <SideBar {...props}/>
@@ -73,4 +62,12 @@ export default function NoteList(props){
             
         </div>
     )
+}
+
+
+export async function loader({request, params}){
+    if (localStorage.getItem('user-data') === null){
+        return(redirect("/login"))
+    }
+    return null
 }

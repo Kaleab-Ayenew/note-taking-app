@@ -1,10 +1,15 @@
 import React from "react";
 import axios from "axios";
 import "./styles/signup.css"
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+
 
 export default function Signup(props){
     let [formData, setFormData] = React.useState({})
     let [error, setError] = React.useState("")
+
+    const navigate = useNavigate()
     function inputHandler(event){
         if (event.target.name === "confirm-password"){
             setError((event.target.value === formData.password ? "" : "Passwords don't match"))
@@ -28,7 +33,7 @@ export default function Signup(props){
         axios(axiosData).
         then((resp)=>{
             if (resp.status === 201){
-                props.setActiveComp({name:"signup-done",props:{}})
+                navigate("/sign-up-success")
             }
         }).
         catch((err)=>{
@@ -41,13 +46,9 @@ export default function Signup(props){
 
     React.useEffect(()=>{
         if (localStorage.getItem('user-data') !== null){
-            props.setActiveComp({name:"list", props:{}})
+            navigate("/home")
         }
     },[])
-
-    function goToLogin(){
-        props.setActiveComp({name:"login",props:{}})
-    }
 
     return(
         <div className="signup-main">
@@ -79,7 +80,7 @@ export default function Signup(props){
                 </label>
                 
                 <button onClick={submitForm}>Sign Up</button>
-                <span onClick={goToLogin} className="create-account">Login</span>
+                <span className="create-account"><Link to="/login">Login</Link></span>
             </div>
         </div>
     )

@@ -2,17 +2,28 @@ import React from "react";
 import axios from "axios";
 import "./styles/Login.css"
 
+import { Form, redirect, useSubmit, useNavigate, Link } from "react-router-dom";
+
 export default function Login(props){
 
     let [formData, setFormData] = React.useState({})
     let [error, setError] = React.useState()
+
+    const navigate = useNavigate()
+    
+
+    React.useEffect(()=>{
+        if (localStorage.getItem("user-data") !== null){
+            navigate("/home")
+        }
+    },[])
+    
 
     function inputHandler(event){
         setFormData((oldVal)=>{
             let newVal = {...oldVal, [event.target.name]:event.target.value}
             return newVal
         })
-        console.log(formData)
     }
 
 
@@ -27,7 +38,7 @@ export default function Login(props){
             localStorage.setItem("user-data", JSON.stringify(resp.data))
 
             if (resp.status === 200){
-                props.setActiveComp({name:"list",props:{}})
+                navigate("/home")
                 console.log(resp)}
         }).
         catch((err)=>{
@@ -39,18 +50,6 @@ export default function Login(props){
                 setError(err.response.data.error)
             }
         })
-
-        console.log("hi",props.url)
-    }
-
-    React.useEffect(()=>{
-        if (localStorage.getItem('user-data') !== null){
-            props.setActiveComp({name:"list", props:{}})
-        }
-    },[])
-
-    function goToSignUp(){
-        props.setActiveComp({name:"signup", props:{}})
     }
 
     return(
@@ -63,6 +62,7 @@ export default function Login(props){
                     {error ? error : ""}
 
                     </span>
+                
                 <label htmlFor="username">
                 Username
                 <input onChange={inputHandler} placeholder="Enter Username" type="text" name="username" id="username" />
@@ -74,7 +74,10 @@ export default function Login(props){
                 </label>
                 
                 <button onClick={submitForm}>Login</button>
-                <span onClick={goToSignUp} className="create-account">Create an Account</span>
+                
+                    <span className="create-account"><Link to={"/sign-up"}>Create an Account</Link></span>
+                
+                
             </div>
         </div>
     )

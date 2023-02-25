@@ -1,16 +1,13 @@
 import axios from "axios"
 import React from "react"
 
+import { useSubmit, useNavigate } from "react-router-dom"
+
 export default function EditHeader(props){
     const saveState = props.saveState
     const setSaveState = props.setSaveState
-
+    const navigate = useNavigate()
     function deleteHandler(event){
-        let editorCompObj = {
-            name: "list",
-            props:{}
-        }
-
         let axiosData = {
             url: props.endPoint,
             method: "DELETE",
@@ -27,15 +24,12 @@ export default function EditHeader(props){
             console.log(err)
         })
 
-        props.setActiveComp(editorCompObj)
+        navigate("/home")
     }
 
     function backToList(event){
-        let editorCompObj = {
-            name: "list",
-            props:{}
-        }
-        props.setActiveComp(editorCompObj)
+        
+        navigate("/home")
     }
 
     return(
